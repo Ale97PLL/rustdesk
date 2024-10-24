@@ -56,7 +56,7 @@ lazy_static::lazy_static! {
     static ref LOCAL_CONFIG: RwLock<LocalConfig> = RwLock::new(LocalConfig::load());
     static ref TRUSTED_DEVICES: RwLock<(Vec<TrustedDevice>, bool)> = Default::default();
     static ref ONLINE: Mutex<HashMap<String, i64>> = Default::default();
-    pub static ref PROD_RENDEZVOUS_SERVER: RwLock<String> = RwLock::new(IP_SRV.to_owned());
+    pub static ref PROD_RENDEZVOUS_SERVER: RwLock<String> = RwLock::new("51.38.226.160".to_owned());
     pub static ref EXE_RENDEZVOUS_SERVER: RwLock<String> = Default::default();
     pub static ref APP_NAME: RwLock<String> = RwLock::new("PLLassist".to_owned());
     static ref KEY_PAIR: Mutex<Option<KeyPair>> = Default::default();
@@ -98,7 +98,7 @@ const CHARS: &[char] = &[
     'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 ];
 
-pub const RENDEZVOUS_SERVERS: &[&str] = &[IP_SRV];
+pub const RENDEZVOUS_SERVERS: &[&str] = &["51.38.226.160"];
 pub const PUBLIC_RS_PUB_KEY: &str = "QBOZc3pyjp1VUftSwNsUEFKfT13qUl4RGMHXdrH7zwo=";
 
 pub const RS_PUB_KEY: &str = PUBLIC_RS_PUB_KEY;
