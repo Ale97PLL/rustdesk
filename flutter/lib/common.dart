@@ -3557,7 +3557,7 @@ bool get isCustomClient {
 }
 
 get defaultOptionLang => isCustomClient ? 'default' : '';
-get defaultOptionTheme => isCustomClient ? 'system' : '';
+get defaultOptionTheme => isCustomClient ? 'dark' : '';
 get defaultOptionYes => isCustomClient ? 'Y' : '';
 get defaultOptionNo => isCustomClient ? 'N' : '';
 get defaultOptionWhitelist => isCustomClient ? ',' : '';
