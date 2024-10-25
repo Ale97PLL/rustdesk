@@ -19,10 +19,13 @@ env:
   TAG_NAME: "${{ inputs.upload-tag }}"
   VCPKG_COMMIT_ID: "1de2026f28ead93ff1773e6e680387643e914ea1"
   VERSION: "1.3.2"
+  CLIENT_EXECUTABLE: "rustdesk"
+  # To make a custom build with your own servers set the below secret values
+  RS_PUB_KEY: "${{ secrets.RS_PUB_KEY }}"
+  RENDEZVOUS_SERVER: "${{ secrets.RENDEZVOUS_SERVER }}"
   API_SERVER: "${{ secrets.API_SERVER }}"
   UPLOAD_ARTIFACT: "${{ inputs.upload-artifact }}"
   SIGN_BASE_URL: "${{ secrets.SIGN_BASE_URL }}"
-  CLIENT_EXECUTABLE: "rustdesk"
 
 jobs:
   build-RustDeskTempTopMostWindow:
@@ -187,7 +190,7 @@ jobs:
         if: env.UPLOAD_ARTIFACT == 'true'
         run: |
           pushd ./res/msi
-          python preprocess.py --arp -d ../../rustdesk --app-name --conn-type "incoming"
+          python preprocess.py --arp -d ../../rustdesk --app-name --conn-type "incoming" --app-name "testName"
           nuget restore msi.sln
           msbuild msi.sln -p:Configuration=Release -p:Platform=x64 /p:TargetVersion=Windows10
           mv ./Package/bin/x64/Release/en-us/Package.msi ../../SignOutput/${{ env.CLIENT_EXECUTABLE }}-${{ env.VERSION }}-${{ matrix.job.arch }}.msi
