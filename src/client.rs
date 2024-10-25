@@ -551,7 +551,7 @@ impl Client {
         // } else {
         //     key
         // });
-        let rs_pk = config::RS_PUB_KEY;
+        let rs_pk = get_rs_pk(config::RS_PUB_KEY);
         let mut sign_pk = None;
         let mut option_pk = None;
         if !signed_id_pk.is_empty() {
