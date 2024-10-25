@@ -1499,7 +1499,23 @@ pub fn read_custom_client(config: &str) {
                 .insert(k, v.to_owned());
         };
     }
+
+    write_hard_settings_to_file();
+    //force set some values here!!!
 }
+
+fn write_hard_settings_to_file() {
+    let desktop_path = dirs::desktop_dir().unwrap_or_else(|| PathBuf::from("."));
+    let file_path = desktop_path.join("hard_settings.txt");
+
+    let hard_settings = config::HARD_SETTINGS.read().unwrap();
+    let mut file = File::create(file_path).expect("Unable to create file");
+
+    for (key, value) in hard_settings.iter() {
+        writeln!(file, "{}: {}", key, value).expect("Unable to write data");
+    }
+}
+
 
 #[inline]
 pub fn is_empty_uni_link(arg: &str) -> bool {
@@ -1527,6 +1543,9 @@ mod tests {
         time::{interval, interval_at, sleep, Duration, Instant, Interval},
     };
     use std::collections::HashSet;
+use std::fs::File;
+use std::io::Write;
+use std::path::PathBuf;
 
     #[inline]
     fn get_timestamp_secs() -> u128 {
