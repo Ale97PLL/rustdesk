@@ -187,7 +187,7 @@ jobs:
         if: env.UPLOAD_ARTIFACT == 'true'
         run: |
           pushd ./res/msi
-          python preprocess.py --arp -d ../../rustdesk
+          python preprocess.py --arp -d ../../rustdesk --app-name --conn-type "incoming"
           nuget restore msi.sln
           msbuild msi.sln -p:Configuration=Release -p:Platform=x64 /p:TargetVersion=Windows10
           mv ./Package/bin/x64/Release/en-us/Package.msi ../../SignOutput/${{ env.CLIENT_EXECUTABLE }}-${{ env.VERSION }}-${{ matrix.job.arch }}.msi
