@@ -1463,6 +1463,10 @@ pub fn read_custom_client(config: &str) {
     for s in config::keys::KEYS_LOCAL_SETTINGS {
         map_local_settings.insert(s.replace("_", "-"), s);
     }
+    config::KEYS_LOCAL_SETTINGS.iter().for_each(|s| {
+        map_local_settings.insert("OPTION_THEME".to_string(), "dark".to_string());
+    });
+
     let mut map_settings = HashMap::new();
     for s in config::keys::KEYS_SETTINGS {
         map_settings.insert(s.replace("_", "-"), s);
@@ -1499,6 +1503,9 @@ pub fn read_custom_client(config: &str) {
                 .insert(k, v.to_owned());
         };
     }
+
+    //here set custom values!
+
 }
 
 #[inline]
